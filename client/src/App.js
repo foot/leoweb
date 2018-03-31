@@ -51,9 +51,10 @@ class App extends Component {
   handleSubmit = async ev => {
     ev.preventDefault();
     const { value } = this.state;
-    const { en, de } = await window
-      .fetch(`/lookup/${value}`)
+    const { data } = await window
+      .fetch(`/api/lookup/en-de/${value}`)
       .then(res => res.json());
+    const { from: en, to: de } = data[0];
     this.setState({
       definitions: [{ value, en, de }, ...this.state.definitions]
     });
