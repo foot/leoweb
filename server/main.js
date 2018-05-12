@@ -5,8 +5,8 @@ const app = express();
 
 app.get('/api/lookup/:fromLang-:toLang/:word', (req, res) => {
   const { fromLang, toLang, word } = req.params;
-  console.log({ fromLang, toLang, word });
-  dictcc.translate(fromLang, toLang, word, (data, error) => {
+  console.log(JSON.stringify({ fromLang, toLang, word }));
+  dictcc.translate(fromLang, toLang, encodeURIComponent(word), (data, error) => {
     if (error) {
       return res.status(500).json({ error });
     }
