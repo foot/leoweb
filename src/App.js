@@ -153,6 +153,15 @@ class App extends Component {
     saveDefinitions(newDefs);
   };
 
+  handleClickDumpWords = () => {
+    const { definitions } = this.state;
+    const clean = definitions.map(({ value, en, de }, i) => ({
+      ...pair(en, de),
+      value
+    }));
+    console.log(JSON.stringify(clean, null, 4));
+  };
+
   render() {
     const { definitions, value, responses, showWordSelector } = this.state;
     return (
@@ -173,6 +182,7 @@ class App extends Component {
                 onClickOption={this.handleSelectWord}
               />
             )}
+          <button onClick={this.handleClickDumpWords}>dump clean words</button>
           <Table>
             <thead>
               <tr>
